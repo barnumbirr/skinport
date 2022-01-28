@@ -64,6 +64,9 @@ class SkinPort:
                 [optional] The currency for pricing. Default EUR.
                 Supported: AUD, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HRK,
                 NOK, PLN, RUB, SEK, TRY, USD.
+            currency: boolean
+                [optional] If true, it shows only tradable items on the
+                market (Default false)
 
         Returns:
             A dict representation of the JSON returned by the API.
