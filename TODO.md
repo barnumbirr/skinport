@@ -1,4 +1,4 @@
-# skinport TODO
+# TODO
 
 ## Command line interface
 

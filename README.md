@@ -1,8 +1,6 @@
 # skinport
 
-A Python wrapper around the [Skinport API](https://skinport.com/). To learn
-more about Skinport API, check out the
-[official documentation](https://docs.skinport.com/#introduction).
+An unofficial Python wrapper around the [Skinport](https://skinport.com/) API.
 
 ## Installation
 
@@ -29,6 +27,12 @@ skins = skinport.SkinPort()
 
 print(skins.items())
 ```
+
+## Documentation
+
+Documentation for the skinport library is available [here](./docs/api.md).\
+To learn more about the Skinport API, check out the
+[official documentation](https://docs.skinport.com/#introduction).
 
 ## Skinport API Key
 

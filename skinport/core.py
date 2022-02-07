@@ -13,7 +13,7 @@ class SkinPort:
         self.api_base_url += f"{API_VERSION}/"
 
     @property
-    def token(self):
+    def _token(self):
         from . import CLIENT_ID, CLIENT_SECRET
         return base64.b64encode(
             f"{CLIENT_ID}:{CLIENT_SECRET}".encode("utf-8")
@@ -30,7 +30,7 @@ class SkinPort:
             headers={
                 # "User-Agent": f"skinport/{__version__} - github.com/barnumbirr/skinport",
                 "Content-Type": "application/json",
-                "Authorization": f"Basic {self.token}"},
+                "Authorization": f"Basic {self._token}"},
         )
 
         # print(dump.dump_all(response).decode("utf-8"))
@@ -64,7 +64,7 @@ class SkinPort:
                 [optional] The currency for pricing. Default EUR.
                 Supported: AUD, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HRK,
                 NOK, PLN, RUB, SEK, TRY, USD.
-            currency: boolean
+            tradable: boolean
                 [optional] If true, it shows only tradable items on the
                 market (Default false)
 
@@ -81,8 +81,6 @@ class SkinPort:
             Get sales history for specified item.
 
             Arguments:
-                market_hash_name: string
-                    [required] The item's names, comma-delimited.
                 app_id: int
                     [optional] The app_id for the inventory's game
                     (default 730).
@@ -90,6 +88,8 @@ class SkinPort:
                     [optional] The currency for pricing. Default EUR.
                     Supported: AUD, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HRK,
                     NOK, PLN, RUB, SEK, TRY, USD.
+                market_hash_name: string
+                    [required] The item's names, comma-delimited.
 
             Returns:
                 A dict representation of the JSON returned by the API.
