@@ -14,6 +14,11 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Fixes
 ### Security
 
+## [0.1.2] - 08-02-2022
+
+### Fixes
+- fix return in `_request()`
+
 ## [0.1.1] - 08-02-2022
 
 ### New

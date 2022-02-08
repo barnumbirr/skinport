@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='skinport',
-    version='0.1.1',
+    version='0.1.2',
     author='Martin Simon',
     author_email='me@martinsimon.me',
     description='A Python wrapper around the Skinport API.',

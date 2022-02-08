@@ -35,9 +35,9 @@ class SkinPort:
                 "Authorization": f"Basic {self._token}"},
         )
 
-        print(dump.dump_all(response).decode("utf-8"))
-        #response.encoding = "utf-8"
-        #return response.json()
+        #print(dump.dump_all(response).decode("utf-8"))
+        response.encoding = "utf-8"
+        return response.json()
 
     def _get(self, path, params=None):
         """ Read API resources. """
