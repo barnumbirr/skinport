@@ -3,6 +3,7 @@
 import json
 import base64
 import requests
+import pkg_resources
 from requests_toolbelt.utils import dump
 
 class SkinPort:
@@ -11,6 +12,7 @@ class SkinPort:
         from . import API_BASE_URL, API_VERSION
         self.api_base_url = API_BASE_URL
         self.api_base_url += f"{API_VERSION}/"
+        self.version = pkg_resources.require("skinport")[0].version
 
     @property
     def _token(self):
@@ -28,14 +30,14 @@ class SkinPort:
             params=params,
             data=json.dumps(payload) if payload else payload,
             headers={
-                # "User-Agent": f"skinport/{__version__} - github.com/barnumbirr/skinport",
+                "User-Agent": f"skinport/{self.version} - github.com/barnumbirr/skinport",
                 "Content-Type": "application/json",
                 "Authorization": f"Basic {self._token}"},
         )
 
-        # print(dump.dump_all(response).decode("utf-8"))
-        response.encoding = "utf-8"
-        return response.json()
+        print(dump.dump_all(response).decode("utf-8"))
+        #response.encoding = "utf-8"
+        #return response.json()
 
     def _get(self, path, params=None):
         """ Read API resources. """
