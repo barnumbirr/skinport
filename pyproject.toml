@@ -1,0 +1,51 @@
+[project]
+name = "skinport"
+version = "0.2.0"
+description = "A Python wrapper around the Skinport API."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [
+    { name = "Martin Simon", email = "me@martinsimon.me" },
+]
+keywords = [
+    "skinport", "Counter Strike", "CS2", "DOTA2",
+    "Rust", "Team Fortress 2", "TF2", "wrapper", "api",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "requests",
+    "brotli",
+    "python-socketio[client]",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/barnumbirr/skinport"
+Source = "https://github.com/barnumbirr/skinport"
+Changelog = "https://github.com/barnumbirr/skinport/blob/master/CHANGELOG.md"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: tests that hit the live Skinport API (require credentials)",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]

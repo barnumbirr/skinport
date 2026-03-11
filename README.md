@@ -13,7 +13,7 @@ $ pip install skinport
 To install from source use:
 
 ```bash
-$ python setup.py install
+$ pip install -e .
 ```
 
 ## Usage
@@ -21,23 +21,62 @@ $ python setup.py install
 ```python
 import skinport
 
-skinport.CLIENT_ID = "<skinport_client_id>"
-skinport.CLIENT_SECRET = "<skinport_client_id>"
-skins = skinport.SkinPort()
+# Public endpoints work without credentials
+client = skinport.Client()
+items = client.items(app_id=730, currency="EUR")
+client.sales.history(market_hash_name="AK-47 | Redline (Field-Tested)")
+client.sales.out_of_stock()
 
-print(skins.items())
+# Authenticated endpoints require credentials
+client = skinport.Client(
+    client_id="<skinport_client_id>",
+    client_secret="<skinport_client_secret>",
+)
+transactions = client.account.transactions()
+```
+
+The client can also be used as a context manager:
+
+```python
+with skinport.Client() as client:
+    items = client.items()
+    history = client.sales.history(market_hash_name="AK-47 | Redline (Field-Tested)")
+```
+
+### Rate Limiting
+
+Client-side rate limiting is enabled by default (8 requests per 5 minutes per
+endpoint group), matching the Skinport API limits. The client will automatically
+sleep when the limit is reached. To disable:
+
+```python
+client = skinport.Client(rate_limit=False)
+```
+
+### WebSocket Sale Feed
+
+```python
+from skinport import SaleFeed
+
+feed = SaleFeed(app_id=730, currency="EUR", locale="en")
+
+@feed.on_event
+def handle(data):
+    print(data["eventType"], data["sales"])
+
+feed.connect()  # blocks until disconnected
 ```
 
 ## Documentation
 
 Documentation for the skinport library is available [here](./docs/api.md).\
 To learn more about the Skinport API, check out the
-[official documentation](https://docs.skinport.com/#introduction).
+[official documentation](https://docs.skinport.com/).
 
 ## Skinport API Key
 
-You will need an API key to Skinport to access the API. To obtain a key, follow
-these steps:
+You will need an API key to Skinport to access authenticated endpoints. To
+obtain a key, follow these steps:
 
 1) Register for and verify an [account](https://skinport.com/signup).
 2) [Log into](https://skinport.com/account) your account.
@@ -48,7 +87,7 @@ these steps:
 ## License
 
 ```
-Copyright 2022 Martin Simon
+Copyright 2022-2026 Martin Simon
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

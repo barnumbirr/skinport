@@ -1,8 +1,27 @@
-# -*- coding: utf-8 -*-
+"""
+skinport
+~~~~~~~~
 
-from .core import SkinPort
+A Python wrapper around the Skinport API.
 
-API_BASE_URL = "https://api.skinport.com/"
-API_VERSION = "v1"
-CLIENT_ID = None
-CLIENT_SECRET = None
+:copyright: (c) 2022 Martin Simon.
+:license: Apache 2.0, see LICENSE for details.
+"""
+
+from .client import Client
+from .exceptions import (
+    SkinportAPIError,
+    SkinportAuthError,
+    SkinportError,
+    SkinportRateLimitError,
+)
+from .salefeed import SaleFeed
+
+__all__ = [
+    "Client",
+    "SaleFeed",
+    "SkinportAPIError",
+    "SkinportAuthError",
+    "SkinportError",
+    "SkinportRateLimitError",
+]
